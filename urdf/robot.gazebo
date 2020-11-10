@@ -20,7 +20,7 @@
       <odometryFrame>odom</odometryFrame>
       <odometrySource>world</odometrySource>
       <topicName>cmd_vel</topicName>
-      <broadcastTF>true</broadcastTF>
+      <broadcastTF>false</broadcastTF>
     </plugin>
 
     <plugin name="imu_controller" filename="libhector_gazebo_ros_imu.so">
