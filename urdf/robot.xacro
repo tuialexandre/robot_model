@@ -303,7 +303,7 @@
   <xacro:arg name="gpu" default="false"/>
   <xacro:property name="gpu" value="$(arg gpu)" />
   <xacro:include filename="$(find robosense_description)/urdf/RS-16.urdf.xacro"/>
-  <RS-16 parent="chassis" name="robosense" topic="/rs_points" hz="20" samples="900" gpu="${gpu}">
+  <RS-16 parent="chassis" name="robosense" topic="/rslidar_points" hz="10" samples="900" gpu="${gpu}">
     <origin xyz=".15 0 0.14" rpy="0 0 0" />
   </RS-16>
 
