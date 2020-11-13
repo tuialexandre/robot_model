@@ -13,14 +13,14 @@
   <joint name="robot_footprint_joint" type="fixed">
     <origin xyz="0 0 0" rpy="0 0 0" />
     <parent link="robot_footprint"/>
-    <child link="chassis" />
+    <child link="base_link" />
   </joint>
 
-  <link name='chassis'>
+  <link name='base_link'>
     <pose>0 0 0.1 0 0 0</pose>
 
     <inertial>
-      <mass value="5.0"/>
+      <mass value="20.0"/>
       <origin xyz="0.0 0 0" rpy=" 0 0 0"/>
       <inertia
           ixx="0.1" ixy="0" ixz="0"
@@ -32,18 +32,52 @@
     <collision name='collision'>
       <origin xyz="0 0 0" rpy=" 0 0 0"/> 
       <geometry>
-        <box size=".4 .3 .08"/>
+        <box size=".5 .35 .08"/>
+      </geometry>
+    </collision>
+
+    <visual name='base_link_visual'>
+      <origin xyz="0 0 0" rpy=" 0 0 0"/>
+      <geometry>
+        <box size=".5 .35 .08"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <link name='chassis'>
+    <pose>0 0 0.1 0 0 0</pose>
+
+    <inertial>
+      <mass value="20.0"/>
+      <origin xyz="0.0 0 0" rpy=" 0 0 0"/>
+      <inertia
+          ixx="0.1" ixy="0" ixz="0"
+          iyy="0.1" iyz="0"
+          izz="0.1"
+      />
+    </inertial>
+
+    <collision name='collision'>
+      <origin xyz="0 0 0" rpy=" 0 0 0"/> 
+      <geometry>
+        <box size=".4 .3 .30"/>
       </geometry>
     </collision>
 
     <visual name='chassis_visual'>
       <origin xyz="0 0 0" rpy=" 0 0 0"/>
       <geometry>
-        <box size=".4 .3 .08"/>
+        <box size=".4 .3 .30"/>
       </geometry>
     </visual>
-
   </link>
+
+  <joint name="base_link_chassis_joint" type="fixed">
+    <axis xyz="0 1 0" />
+    <origin xyz="0 0 0.1" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="chassis"/>
+  </joint>
 
   <link name='front_left_wheel'>
     <commandTopic>cmd_vel</commandTopic>
@@ -238,49 +272,49 @@
 
   <joint name="imu_joint" type="fixed">
     <axis xyz="0 1 0" />
-    <origin xyz="0 0 0.08" rpy="0 0 0"/>
+    <origin xyz="0 0 0.18" rpy="0 0 0"/>
     <parent link="chassis"/>
     <child link="imu"/>
   </joint>
   
   <joint name="gps_joint" type="fixed">
     <axis xyz="0 1 0" />
-    <origin xyz="-0.15 0 0.08" rpy="0 0 0"/>
+    <origin xyz="-0.15 0 0.18" rpy="0 0 0"/>
     <parent link="chassis"/>
     <child link="gps"/>
   </joint>
 
   <joint type="continuous" name="front_left_wheel_joint">
-    <origin xyz="0.15 0.18 0" rpy="0 0 0"/>
+    <origin xyz="0.15 0.22 0" rpy="0 0 0"/>
     <child link="front_left_wheel"/>
-    <parent link="chassis"/>
+    <parent link="base_link"/>
     <axis xyz="0 1 0" rpy="0 0 0"/>
     <limit effort="10000" velocity="1000"/>
     <dynamics damping="1.0" friction="1.0"/>
   </joint>
 
   <joint type="continuous" name="front_right_wheel_joint">
-    <origin xyz="0.15 -0.18 0" rpy="0 0 0"/>
+    <origin xyz="0.15 -0.22 0" rpy="0 0 0"/>
     <child link="front_right_wheel"/>
-    <parent link="chassis"/>
+    <parent link="base_link"/>
     <axis xyz="0 1 0" rpy="0 0 0"/>
     <limit effort="10000" velocity="1000"/>
     <dynamics damping="1.0" friction="1.0"/>
   </joint>
 
   <joint type="continuous" name="back_left_wheel_joint">
-    <origin xyz="-0.15 0.18 0" rpy="0 0 0"/>
+    <origin xyz="-0.15 0.22 0" rpy="0 0 0"/>
     <child link="back_left_wheel"/>
-    <parent link="chassis"/>
+    <parent link="base_link"/>
     <axis xyz="0 1 0" rpy="0 0 0"/>
     <limit effort="10000" velocity="1000"/>
     <dynamics damping="1.0" friction="1.0"/>
   </joint>
 
   <joint type="continuous" name="back_right_wheel_joint">
-    <origin xyz="-0.15 -0.18 0" rpy="0 0 0"/>
+    <origin xyz="-0.15 -0.22 0" rpy="0 0 0"/>
     <child link="back_right_wheel"/>
-    <parent link="chassis"/>
+    <parent link="base_link"/>
     <axis xyz="0 1 0" rpy="0 0 0"/>
     <limit effort="10000" velocity="1000"/>
     <dynamics damping="1.0" friction="1.0"/>
@@ -304,7 +338,7 @@
   <xacro:property name="gpu" value="$(arg gpu)" />
   <xacro:include filename="$(find robosense_description)/urdf/RS-16.urdf.xacro"/>
   <RS-16 parent="chassis" name="robosense" topic="/rslidar_points" hz="10" samples="900" gpu="${gpu}">
-    <origin xyz=".15 0 0.14" rpy="0 0 0" />
+    <origin xyz=".15 0 0.24" rpy="0 0 0" />
   </RS-16>
 
 
