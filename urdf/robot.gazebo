@@ -14,13 +14,13 @@
       <wheelDiameter>0.12</wheelDiameter>
       <robotBaseFrame>robot_footprint</robotBaseFrame>
       <!--<robotBaseFrame>chassis</robotBaseFrame>-->
-      <torque>50</torque>
+      <torque>45</torque>
       <commandTopic>cmd_vel</commandTopic>
       <odometryTopic>odom</odometryTopic>
       <odometryFrame>odom</odometryFrame>
       <odometrySource>world</odometrySource>
       <topicName>cmd_vel</topicName>
-      <broadcastTF>false</broadcastTF>
+      <broadcastTF>true</broadcastTF>
     </plugin>
 
     <plugin name="imu_controller" filename="libhector_gazebo_ros_imu.so">
@@ -30,12 +30,12 @@
         <bodyName>imu</bodyName>
         <!--<frameId>imu</frameId>-->
         <topicName>imu/data</topicName>
-        <accelDrift>0.005 0.005 0.005</accelDrift>
-        <accelGaussianNoise>0.005 0.005 0.005</accelGaussianNoise>
-        <rateDrift>0.005 0.005 0.005 </rateDrift>
-        <rateGaussianNoise>0.005 0.005 0.005 </rateGaussianNoise>
-        <headingDrift>0.005</headingDrift>
-        <headingGaussianNoise>0.005</headingGaussianNoise>
+        <accelDrift>0.002 0.002 0.002</accelDrift>
+        <accelGaussianNoise>0.002 0.002 0.002</accelGaussianNoise>
+        <rateDrift>0.002 0.002 0.002 </rateDrift>
+        <rateGaussianNoise>0.002 0.002 0.002 </rateGaussianNoise>
+        <headingDrift>0.002</headingDrift>
+        <headingGaussianNoise>0.002</headingGaussianNoise>
     </plugin>
 
     <plugin name="gps_controller" filename="libhector_gazebo_ros_gps.so">
@@ -50,8 +50,8 @@
       <referenceLongitude>8.9</referenceLongitude>
       <referenceHeading>0</referenceHeading>
       <referenceAltitude>0</referenceAltitude>
-      <gaussianNoise>0.01 0.01 0.1</gaussianNoise> <!-- this is std. dev. not var.-->
-      <drift>0.0001 0.0001 0.0001</drift>
+      <gaussianNoise>0.005 0.005 0.02</gaussianNoise> <!-- this is std. dev. not var.-->
+      <drift>0.00005 0.00005 0.00005</drift>
     </plugin>
   </gazebo>
   
