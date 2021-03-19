@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="visible_camera">
+    <xacro:macro name="visible_camera">
+
+            
+        <xacro:property name="visible_camera_size_long" value="0.01" />
+        <xacro:property name="visible_camera_size_short" value="0.01" />
+        <xacro:property name="visible_camera_mass" value="0.001" />
+        <xacro:property name="visible_camera_x_distance" value="0.008" />
+        <xacro:property name="visible_camera_z_distance" value="0.02" />
+
+        <link name="visible_camera_link">
+            <!-- Inertial for gazebo to take it into account, Put 1gr weight -->
+        <inertial>
+          <origin xyz="0 0 0" rpy="0 0 0"/>
+          <mass value="${visible_camera_mass}" />
+          <box_inertia
+            m="${visible_camera_mass}"
+            x="${visible_camera_size_long}"
+            y="${visible_camera_size_short}"
+            z="${visible_camera_size_short}"/>
+        </inertial>
+    		  <visual>
+            <origin rpy="0.0 0 0" xyz="0 0 0"/>
+              <geometry>
+                  <box size="${visible_camera_size_long} ${visible_camera_size_short} ${visible_camera_size_short}"/>
+              </geometry>
+          </visual>
+    	</link>
+
+        <gazebo reference="visible_camera_link">
+            <material>Gazebo/Green</material>
+        </gazebo>
+
+        <joint name="visible_camera_joint" type="fixed">
+            <parent link="up_pan_tilt_base_link"/>
+            <child link="visible_camera_link"/>
+            <origin xyz="${visible_camera_x_distance} 0 ${visible_camera_z_distance}" rpy="0 0 0"/>
+        </joint>
+
+        <!-- camera -->
+      <gazebo reference="visible_camera_link">
+        <sensor type="camera" name="camera1">
+          <update_rate>10.0</update_rate>
+          <camera name="sony_ptp_cam">
+            <pose>0 0 0 0 0 0</pose>
+            <horizontal_fov>1.3962634</horizontal_fov>
+            <image>
+              <width>1920</width>
+              <height>1080</height>
+              <format>R8G8B8</format>
+            </image>
+            <clip>
+              <near>0.01</near>
+              <far>10.0</far>
+            </clip>
+            <noise>
+              <type>gaussian</type>
+              <stddev>0.0</stddev>
+            </noise>
+          </camera>
+          <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+            <alwaysOn>true</alwaysOn>
+            <updateRate>0.0</updateRate>
+            <cameraName>pan_tilt/sony_cam_ptp</cameraName>
+            <imageTopicName>image_raw</imageTopicName>
+            <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+            <frameName>main_camera_link</frameName>
+            <hackBaseline>0.07</hackBaseline>
+            <distortionK1>0.0</distortionK1>
+            <distortionK2>0.0</distortionK2>
+            <distortionK3>0.0</distortionK3>
+            <distortionT1>0.0</distortionT1>
+            <distortionT2>0.0</distortionT2>
+          </plugin>
+        </sensor>
+      </gazebo>
+    </xacro:macro>
+</robot>
