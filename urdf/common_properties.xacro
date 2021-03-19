@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="common_properties">
+
+    <xacro:property name="up_base_mass" value="0.1" />
+
+    <xacro:property name="joints_long" value="0.01" />
+    <xacro:property name="joints_short" value="0.02" />
+    <xacro:property name="joints_mass" value="0.1" />
+    <xacro:property name="joint_pan_max_speed" value="1.0" />
+    <xacro:property name="joint_pan_max_effort" value="1.0" />
+    <xacro:property name="joint_tilt_max_speed" value="0.1" />
+    <xacro:property name="joint_tilt_effort" value="0.1" />
+
+    <xacro:property name="base_long" value="0.01" />
+    <xacro:property name="base_short" value="0.02" />
+    <xacro:property name="base_mass" value="0.001" />
+    
+    <gazebo>
+        <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+            <robotNamespace>/pan_tilt</robotNamespace>
+            <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+        </plugin>
+    </gazebo>
+    
+</robot>
