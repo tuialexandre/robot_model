@@ -95,20 +95,20 @@
                 <cylinder_inertia 
                 m="${joints_mass}" 
                 r="0.025"
-                h="0.03"/>
+                h="0.035"/>
             </inertial>
 
             <collision>
                 <origin xyz="0 0 0" rpy="0 0 0"/>
                 <geometry>
-                    <cylinder radius="0.025" length="0.03"/>
+                    <cylinder radius="0.025" length="0.035"/>
                 </geometry>
             </collision>
 
             <visual>
                 <origin rpy="0.0 0 0" xyz="0 0 0"/>
                 <geometry>
-                    <cylinder radius="0.025" length="0.03"/>
+                    <cylinder radius="0.025" length="0.035"/>
                 </geometry>
             </visual>
         </link>
@@ -124,7 +124,7 @@
         <joint name="tilt_joint" type="revolute">
             <parent link="pan_link"/>
             <child link="tilt_link"/>
-            <origin xyz="0.0 0.0 0.02" rpy="0 0 0"/>
+            <origin xyz="0.0 0.0 0.03" rpy="0 0 0"/>
             <limit lower="-0.7" upper="0.7" effort="${joint_tilt_effort}" velocity="${joint_tilt_max_speed}"/>
             <axis xyz="0 1 0"/>
         </joint>
