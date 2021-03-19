@@ -3,13 +3,14 @@
 <robot name="robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
   <xacro:include filename="$(find robot_model)/urdf/robot.gazebo" />
+  <xacro:include filename="$(find robot_model)/urdf/pan_tilt.xacro"/>
+
   <xacro:property name="imu_size" value="0.03"/>
   <xacro:property name="imu_mass" value="0.05"/>
   <xacro:property name="gps_size" value="0.05"/>
   <xacro:property name="gps_mass" value="0.1"/>
-  
-  <link name="robot_footprint"></link>
 
+  <link name="robot_footprint"></link>
   <joint name="robot_footprint_joint" type="fixed">
     <origin xyz="0 0 0.05" rpy="0 0 0" />
     <parent link="robot_footprint"/>
@@ -78,6 +79,7 @@
     <parent link="base_link"/>
     <child link="chassis"/>
   </joint>
+
 
   <link name='neck'>
     <collision name='collision'>
@@ -249,7 +251,7 @@
     </visual>
   </link>
 
-  <link name='camera'>
+  <!-- <link name='camera'>
     <imageTopicName>rgb/image_raw</imageTopicName>
     <inertial>
       <mass value="0.1"/>
@@ -282,7 +284,7 @@
     </visual>
   </link>
 
-  <link name="camera_link_optical"></link>
+  <link name="camera_link_optical"></link> -->
 
   <link name="imu">
     <collision>
@@ -435,19 +437,19 @@
     <limit effort="10000" velocity="1000"/>
     <dynamics damping="1.0" friction="1.0"/>
   </joint>
-
+<!-- 
   <joint type="fixed" name="camera_joint">
     <origin xyz="0.2 0 0" rpy="0 0 0"/>
     <child link="camera"/>
     <parent link="chassis"/>
     <axis xyz="0 1 0" rpy="0 0 0"/>
-  </joint>
+  </joint> -->
 
-  <joint name="camera_optical_joint" type="fixed">
+  <!-- <joint name="camera_optical_joint" type="fixed">
     <origin xyz="0 0 0" rpy="-1.5707 0 -1.5707"/>
     <parent link="camera"/>
     <child link="camera_link_optical"/>
-  </joint>
+  </joint> -->
 
   <!--Lidar-->
   <xacro:arg name="gpu" default="false"/>
@@ -465,6 +467,7 @@
     <parent link="rslidar"/>
     <axis xyz="0 0 0" rpy="0 0 0"/>
   </joint>
-
-
+  
+  <pan_tilt/>
+  <visible_camera/>
 </robot>
