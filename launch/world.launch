@@ -11,8 +11,6 @@
   <arg name="pitch" default="0"/>
   <arg name="yaw" default="0"/>
 
-  <!-- Launch other relevant files-->
-  <include file="$(find robot_model)/launch/robot_description.launch"/>
 
   <!-- World File -->
   <arg name="world_file" default="$(find robot_model)/worlds/test_world.world"/>
@@ -25,10 +23,8 @@
     <arg name="world_name" value="$(arg world_file)"/>
     <remap from="tf" to="gazebo_tf"/>
   </include>
-
-  <!-- Find my robot Description-->
-  <arg name="gpu" default="false"/>
-  <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find robot_model)/urdf/robot.xacro' gpu:=$(arg gpu)"/>
+  <!-- Launch other relevant files-->
+  <include file="$(find robot_model)/launch/robot_description.launch"/>
 
   <!-- Spawn My Robot -->
   <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" 
