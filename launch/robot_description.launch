@@ -1,16 +1,26 @@
 <?xml version="1.0"?>
 <launch>
 
-  <!-- send urdf to param server -->
-  <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find robot_model)/urdf/robot.xacro'" />
 
+  <!-- load controller parameters pan tilt-->
+  <rosparam file="$(find robot_model)/config/pan_tilt_controllers.yaml" command="load"/>
+  <!-- send urdf to param server -->
+  <param name="robot_description" command="$(find xacro)/xacro '$(find robot_model)/urdf/robot.xacro'"/>
   <!-- Send fake joint values-->
-  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+  <!-- <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
     <param name="use_gui" value="false"/>
-  </node>
+  </node> -->
 
   <!-- Send robot states to tf -->
-  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen"/>
+  <!-- <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen"/> -->
+  <!-- load the controllers -->
 
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+    	output="screen" ns="/pan_tilt" args="pan_joint_position_controller tilt_joint_position_controller joint_state_controller"/>
+	<!-- Starting robot state publish which will publish tf -->
+	<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
+    	respawn="false" output="screen">
+    	<remap from="/joint_states" to="/pan_tilt/joint_states"/>
+  	</node>
 
 </launch>
