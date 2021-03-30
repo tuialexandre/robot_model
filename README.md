@@ -1,5 +1,5 @@
 # Description
-4 wheel steer drive model with GPS, IMU and RSLIDAR
+4 wheel skid steer drive model with GPS, IMU and RSLIDAR
 
 ## Requirements:
 
