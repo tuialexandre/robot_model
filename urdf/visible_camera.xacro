@@ -62,7 +62,7 @@
           <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
             <alwaysOn>true</alwaysOn>
             <updateRate>0.0</updateRate>
-            <cameraName>pan_tilt/sony_cam_ptp</cameraName>
+            <cameraName>sony_cam</cameraName>
             <imageTopicName>image_raw</imageTopicName>
             <cameraInfoTopicName>camera_info</cameraInfoTopicName>
             <frameName>visible_camera_link</frameName>
