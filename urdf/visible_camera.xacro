@@ -38,6 +38,13 @@
             <origin xyz="${visible_camera_x_distance} 0 ${visible_camera_z_distance}" rpy="0 0 0"/>
         </joint>
 
+        <link name="visible_camera_rotation_link"/>
+        <joint name="visible_camera_rotation_joint" type="fixed">
+            <parent link="visible_camera_link"/>
+            <child link="visible_camera_rotation_link"/>
+            <origin xyz="0 0 0" rpy="-1.57 0 -1.57"/>
+        </joint>
+
         <!-- camera -->
       <gazebo reference="visible_camera_link">
         <sensor type="camera" name="camera1">
@@ -65,7 +72,7 @@
             <cameraName>sony_cam</cameraName>
             <imageTopicName>image_raw</imageTopicName>
             <cameraInfoTopicName>camera_info</cameraInfoTopicName>
-            <frameName>visible_camera_link</frameName>
+            <frameName>visible_camera_rotation_link</frameName>
             <hackBaseline>0.07</hackBaseline>
             <distortionK1>0.0</distortionK1>
             <distortionK2>0.0</distortionK2>
