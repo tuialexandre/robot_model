@@ -51,7 +51,7 @@
           <update_rate>10.0</update_rate>
           <camera name="sony_ptp_cam">
             <pose>0 0 0 0 0 0</pose>
-            <horizontal_fov>1.3962634</horizontal_fov>
+            <horizontal_fov>2.3962634</horizontal_fov>
             <image>
               <width>1920</width>
               <height>1080</height>
@@ -59,7 +59,7 @@
             </image>
             <clip>
               <near>0.01</near>
-              <far>10.0</far>
+              <far>20.0</far>
             </clip>
             <noise>
               <type>gaussian</type>
