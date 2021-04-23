@@ -38,13 +38,20 @@
             <origin xyz="${visible_camera_x_distance} 0 ${visible_camera_z_distance}" rpy="0 0 0"/>
         </joint>
 
+        <link name="visible_camera_rotation_link"/>
+        <joint name="visible_camera_rotation_joint" type="fixed">
+            <parent link="visible_camera_link"/>
+            <child link="visible_camera_rotation_link"/>
+            <origin xyz="0 0 0" rpy="-1.57 0 -1.57"/>
+        </joint>
+
         <!-- camera -->
       <gazebo reference="visible_camera_link">
         <sensor type="camera" name="camera1">
           <update_rate>10.0</update_rate>
           <camera name="sony_ptp_cam">
             <pose>0 0 0 0 0 0</pose>
-            <horizontal_fov>1.3962634</horizontal_fov>
+            <horizontal_fov>2.3962634</horizontal_fov>
             <image>
               <width>1920</width>
               <height>1080</height>
@@ -52,7 +59,7 @@
             </image>
             <clip>
               <near>0.01</near>
-              <far>10.0</far>
+              <far>20.0</far>
             </clip>
             <noise>
               <type>gaussian</type>
@@ -62,10 +69,10 @@
           <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
             <alwaysOn>true</alwaysOn>
             <updateRate>0.0</updateRate>
-            <cameraName>pan_tilt/sony_cam_ptp</cameraName>
+            <cameraName>sony_cam</cameraName>
             <imageTopicName>image_raw</imageTopicName>
             <cameraInfoTopicName>camera_info</cameraInfoTopicName>
-            <frameName>visible_camera_link</frameName>
+            <frameName>visible_camera_rotation_link</frameName>
             <hackBaseline>0.07</hackBaseline>
             <distortionK1>0.0</distortionK1>
             <distortionK2>0.0</distortionK2>
